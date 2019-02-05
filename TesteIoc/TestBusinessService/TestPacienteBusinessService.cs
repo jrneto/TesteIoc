@@ -21,7 +21,7 @@ namespace TestBusinessService
             rep = new PacienteRepository();
             IPacienteBusinessService service = new PacienteBusinessService(rep);
             IList<Paciente> pacientes = service.BuscarPublicoAlvo();
-            log.Info("Inicio BuscaPaciente_OracleManaged");
+            log.Info("Fim BuscaPaciente_OracleManaged");
             Assert.IsNotNull(pacientes);
             Assert.IsTrue(pacientes.Count > 0);
         }

@@ -14,7 +14,7 @@ namespace OracleManagedRepository
 {
     public class PacienteRepository : IPacienteRepository
     {
-        //protected static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        protected static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public IDbConnection ObterConexao(ConexaoBD eConexao)
         {
             IDbConnection conn;
@@ -48,7 +48,7 @@ namespace OracleManagedRepository
             }
             catch (Exception ex)
             {
-                //log.Error("Erro ao buscar pacientes TNH.", ex);
+                log.Error("Erro ao buscar pacientes TNH.", ex);
                 throw;
             }
         }
