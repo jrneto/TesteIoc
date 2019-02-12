@@ -3,6 +3,7 @@ using BusinessInterface;
 using BusinessService;
 using Entidades;
 using NUnit.Framework;
+using OracleDataAccessRepository;
 using OracleManagedRepository;
 using RepositoryInterfaces;
 using System.Collections.Generic;
@@ -22,6 +23,18 @@ namespace TestBusinessService
             IPacienteBusinessService service = new PacienteBusinessService(rep);
             IList<Paciente> pacientes = service.BuscarPublicoAlvo();
             log.Info("Fim BuscaPaciente_OracleManaged");
+            Assert.IsNotNull(pacientes);
+            Assert.IsTrue(pacientes.Count > 0);
+        }
+
+        [Test]
+        public void BuscaPaciente_OracleDataAccess()
+        {
+            log.Info("Inicio BuscaPaciente_OracleDataAccess");
+            rep = new PacienteRepositoryDataAccess();
+            IPacienteBusinessService service = new PacienteBusinessService(rep);
+            IList<Paciente> pacientes = service.BuscarPublicoAlvo();
+            log.Info("Fim BuscaPaciente_OracleDataAccess");
             Assert.IsNotNull(pacientes);
             Assert.IsTrue(pacientes.Count > 0);
         }

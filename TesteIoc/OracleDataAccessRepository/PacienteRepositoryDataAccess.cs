@@ -16,6 +16,11 @@ namespace OracleDataAccessRepository
             _conn = conn;
         }
 
+        public PacienteRepositoryDataAccess()
+        {
+            _conn = new DbConnection(new DbConnectionFactory("ISSP_DATAACCESS"));
+        }
+
         public IList<Paciente> BuscarPulicoAlvo()
         {
             using (var command = _conn.CreateCommand())
