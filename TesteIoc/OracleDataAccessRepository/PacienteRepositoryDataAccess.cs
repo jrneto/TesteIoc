@@ -1,4 +1,5 @@
 ﻿using Entidades;
+using Oracle.DataAccess.Client;
 using OracleDataAccessRepository.Extensions;
 using RepositoryInterfaces;
 using System.Collections.Generic;
@@ -26,10 +27,9 @@ namespace OracleDataAccessRepository
             using (var command = _conn.CreateCommand())
             {
 
-                command.Parameters.Add(DbCommandExtensions.CreateParameter(command, "PO_CURSOR",  ParameterDirection.Output)); 
-
+                command.Parameters.Add(DbCommandExtensions.CreateParameter(command, "PO_CURSOR", null, ParameterDirection.Output, OracleDbType.RefCursor)); 
                 command.CommandType = CommandType.StoredProcedure;
-                command.CommandText = "GDD.TESTE_TNH";
+                command.CommandText = "GDD.TESTE_TNH2";
 
                 return this.ToList(command).ToList();
             }

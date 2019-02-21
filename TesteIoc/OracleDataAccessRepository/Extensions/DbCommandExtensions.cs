@@ -1,13 +1,15 @@
-﻿using System;
+﻿using Oracle.DataAccess.Client;
+using System;
 using System.Data;
 
 namespace OracleDataAccessRepository.Extensions
 {
     public static class DbCommandExtensions
     {
-        public static IDbDataParameter CreateParameter(this IDbCommand command, string name, object value)
+        
+        public static IDbDataParameter CreateParameter(this IDbCommand command, string name, object value, ParameterDirection parameterDirection, OracleDbType oracleDbType)
         {
-            var parameter = command.CreateParameter();
+            var parameter = (command as OracleCommand).CreateParameter();
             parameter.ParameterName = name;
             if(value != null && value.GetType() == typeof(DateTime))
             {
@@ -16,18 +18,15 @@ namespace OracleDataAccessRepository.Extensions
             else
             {
                 parameter.Value = value ?? DBNull.Value;
-            }
+            } 
 
-            
-            //parameter.DbType = DbType.String;
-            return parameter;
-        }
-
-        public static IDbDataParameter CreateParameter(this IDbCommand command, string name,  ParameterDirection parameterDirection)
-        {
-            var parameter = CreateParameter(command, name, null); 
+            parameter.OracleDbType = oracleDbType;
             parameter.Direction = parameterDirection;
             return parameter;
         }
+
+        
+
+        
     }
 }
